@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${RDS_USERNAME}
-    url: ${RDS_URL}/springPlus
-    password: ${RDS_PASSWORD}
+    username: ${MYSQL_USERNAME}
+    url: jdbc:mysql://localhost:3306/springPlus
+    password: ${MYSQL_PASSWORD}
   jpa:
     properties:
       hibernate:
@@ -14,6 +14,12 @@ spring:
     show-sql: 'true'
   application:
     name: springPlus
+  cloud:
+    aws:
+      s3:
+        bucket: springplus-profile-image-bucket
+      region:
+        static: ap-southeast-2
 jwt:
   secret:
     key: ${JWT_SECRET_KEY}
