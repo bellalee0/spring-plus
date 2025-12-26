@@ -5,6 +5,7 @@ import org.example.expert.config.PasswordEncoder;
 import org.example.expert.domain.common.exception.InvalidRequestException;
 import org.example.expert.domain.user.dto.request.UserChangePasswordRequest;
 import org.example.expert.domain.user.dto.response.UserResponse;
+import org.example.expert.domain.user.dto.response.UserSearchResponse;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,14 @@ public class UserService {
         }
 
         user.changePassword(passwordEncoder.encode(userChangePasswordRequest.getNewPassword()));
+    }
+
+    public UserSearchResponse searchUserByNickname(String nickname) {
+
+        User user = userRepository.findByNickname(nickname)
+            .orElseThrow(() -> new InvalidRequestException("해당 닉네임을 가진 유저가 존재하지 않습니다."));
+
+        return new UserSearchResponse(user.getId(), user.getNickname());
     }
 
     private static void validateNewPassword(UserChangePasswordRequest userChangePasswordRequest) {
