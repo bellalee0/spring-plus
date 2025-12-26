@@ -14,6 +14,12 @@ spring:
     show-sql: 'true'
   application:
     name: springPlus
+  cloud:
+    aws:
+      s3:
+        bucket: springplus-profile-image-bucket
+      region:
+        static: ap-southeast-2
 jwt:
   secret:
     key: ${JWT_SECRET_KEY}
