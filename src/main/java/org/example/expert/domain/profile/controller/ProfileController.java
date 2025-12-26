@@ -1,9 +1,10 @@
 package org.example.expert.domain.profile.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.expert.domain.common.annotation.Auth;
+import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.profile.service.ProfileService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +16,12 @@ public class ProfileController {
 
     private final ProfileService profileService;
 
-    @PostMapping("/users/{userId}/profile")
+    @PostMapping("/users/profile")
     public ResponseEntity<String> uploadProfileImage(
-        @PathVariable long userId,
+        @Auth AuthUser authUser,
         @RequestParam MultipartFile image
     ) {
-        String imageUrl = profileService.uploadProfileImage(userId, image);
+        String imageUrl = profileService.uploadProfileImage(authUser, image);
         return ResponseEntity.ok().body(imageUrl);
     }
 }
