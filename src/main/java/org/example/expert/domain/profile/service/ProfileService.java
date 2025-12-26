@@ -44,10 +44,10 @@ public class ProfileService {
         Profile profile;
 
         if (userId != null) {
-            profile = profileRepository.findById(userId)
+            profile = profileRepository.findByUserId(userId)
                 .orElseThrow(() -> new InvalidRequestException("프로필 이미지가 존재하지 않습니다."));
         } else {
-            profile = profileRepository.findById(authUser.getId())
+            profile = profileRepository.findByUserId(authUser.getId())
                 .orElseThrow(() -> new InvalidRequestException("프로필 이미지가 존재하지 않습니다."));
         }
 
@@ -57,7 +57,7 @@ public class ProfileService {
     @Transactional
     public void deleteProfileImage(AuthUser authUser) {
 
-        Profile profile = profileRepository.findById(authUser.getId())
+        Profile profile = profileRepository.findByUserId(authUser.getId())
             .orElseThrow(() -> new InvalidRequestException("프로필 이미지가 존재하지 않습니다."));
 
         profile.delete();
