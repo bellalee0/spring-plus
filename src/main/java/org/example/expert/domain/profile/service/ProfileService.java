@@ -62,4 +62,24 @@ public class ProfileService {
 
         profile.delete();
     }
+
+    @Transactional
+    public String updateProfileImage(AuthUser authUser, MultipartFile image) {
+
+        User user = User.fromAuthUser(authUser);
+
+        Profile oldProfile = profileRepository.findByUserId(authUser.getId())
+            .orElseThrow(() -> new InvalidRequestException("프로필 이미지가 존재하지 않습니다."));
+        oldProfile.delete();
+
+        String key = UUID.randomUUID().toString();
+        String fileName = user.getEmail() + "/" + key + image.getOriginalFilename();
+
+        String imageUrl = s3Service.upload(image, fileName);
+
+        Profile newProfile = new Profile(user, imageUrl);
+        profileRepository.save(newProfile);
+
+        return imageUrl;
+    }
 }
