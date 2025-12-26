@@ -1,5 +1,6 @@
 package org.example.expert.domain.user.controller;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.example.expert.domain.common.annotation.Auth;
 import org.example.expert.domain.common.dto.AuthUser;
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<UserSearchResponse> searchUserByNickname(
+    public ResponseEntity<List<UserSearchResponse>> searchUserByNickname(
         @RequestParam String nickname
     ) {
         return ResponseEntity.ok(userService.searchUserByNickname(nickname));

@@ -1,5 +1,6 @@
 package org.example.expert.domain.user.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.example.expert.config.PasswordEncoder;
 import org.example.expert.domain.common.exception.InvalidRequestException;
@@ -42,12 +43,11 @@ public class UserService {
         user.changePassword(passwordEncoder.encode(userChangePasswordRequest.getNewPassword()));
     }
 
-    public UserSearchResponse searchUserByNickname(String nickname) {
+    public List<UserSearchResponse> searchUserByNickname(String nickname) {
 
-        User user = userRepository.findByNickname(nickname)
-            .orElseThrow(() -> new InvalidRequestException("해당 닉네임을 가진 유저가 존재하지 않습니다."));
+        List<User> user = userRepository.findAllByNickname(nickname);
 
-        return new UserSearchResponse(user.getId(), user.getNickname());
+        return user.stream().map(u -> new UserSearchResponse(u.getId(), u.getNickname())).toList();
     }
 
     private static void validateNewPassword(UserChangePasswordRequest userChangePasswordRequest) {
