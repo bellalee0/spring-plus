@@ -45,12 +45,21 @@ public class ProfileService {
 
         if (userId != null) {
             profile = profileRepository.findById(userId)
-                .orElseThrow(() -> new InvalidRequestException("존재하지 않는 유저입니다."));
+                .orElseThrow(() -> new InvalidRequestException("프로필 이미지가 존재하지 않습니다."));
         } else {
             profile = profileRepository.findById(authUser.getId())
-                .orElseThrow(() -> new InvalidRequestException("존재하지 않는 유저입니다."));
+                .orElseThrow(() -> new InvalidRequestException("프로필 이미지가 존재하지 않습니다."));
         }
 
         return profile.getImageUrl();
+    }
+
+    @Transactional
+    public void deleteProfileImage(AuthUser authUser) {
+
+        Profile profile = profileRepository.findById(authUser.getId())
+            .orElseThrow(() -> new InvalidRequestException("프로필 이미지가 존재하지 않습니다."));
+
+        profile.delete();
     }
 }

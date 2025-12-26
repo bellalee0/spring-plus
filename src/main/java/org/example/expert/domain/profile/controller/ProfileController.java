@@ -5,6 +5,7 @@ import org.example.expert.domain.common.annotation.Auth;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.profile.service.ProfileService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,5 +36,13 @@ public class ProfileController {
     ) {
         String imageUrl = profileService.getProfileImage(authUser, userId);
         return ResponseEntity.ok().body(imageUrl);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteProfileImage(
+        @Auth AuthUser authUser
+    ) {
+        profileService.deleteProfileImage(authUser);
+        return ResponseEntity.ok().build();
     }
 }
