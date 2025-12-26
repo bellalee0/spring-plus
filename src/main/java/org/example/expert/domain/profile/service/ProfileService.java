@@ -35,4 +35,19 @@ public class ProfileService {
 
         return imageUrl;
     }
+
+    public String getProfileImage(AuthUser authUser, Long userId) {
+
+        Profile profile;
+
+        if (userId != null) {
+            profile = profileRepository.findById(userId)
+                .orElseThrow(() -> new InvalidRequestException("존재하지 않는 유저입니다."));
+        } else {
+            profile = profileRepository.findById(authUser.getId())
+                .orElseThrow(() -> new InvalidRequestException("존재하지 않는 유저입니다."));
+        }
+
+        return profile.getImageUrl();
+    }
 }
