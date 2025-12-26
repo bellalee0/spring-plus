@@ -8,6 +8,7 @@ import org.example.expert.domain.profile.entity.Profile;
 import org.example.expert.domain.profile.repository.ProfileRepository;
 import org.example.expert.domain.user.entity.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -17,6 +18,7 @@ public class ProfileService {
     private final S3Service s3Service;
     private final ProfileRepository profileRepository;
 
+    @Transactional
     public String uploadProfileImage(AuthUser authUser, MultipartFile image) {
 
         User user = User.fromAuthUser(authUser);
@@ -36,6 +38,7 @@ public class ProfileService {
         return imageUrl;
     }
 
+    @Transactional(readOnly = true)
     public String getProfileImage(AuthUser authUser, Long userId) {
 
         Profile profile;
