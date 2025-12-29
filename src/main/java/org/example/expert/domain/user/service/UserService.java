@@ -45,9 +45,7 @@ public class UserService {
 
     public List<UserSearchResponse> searchUserByNickname(String nickname) {
 
-        List<User> user = userRepository.findAllByNickname(nickname);
-
-        return user.stream().map(u -> new UserSearchResponse(u.getId(), u.getNickname())).toList();
+        return userRepository.findAllByNickname(nickname);
     }
 
     private static void validateNewPassword(UserChangePasswordRequest userChangePasswordRequest) {

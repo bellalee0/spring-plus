@@ -5,5 +5,5 @@ import org.example.expert.domain.user.dto.response.UserSearchResponse;
 import org.example.expert.domain.user.entity.User;
 
 public interface UserCustomRepository {
-    List<User> findAllByNickname(String nickname);
+    List<UserSearchResponse> findAllByNickname(String nickname);
 }
