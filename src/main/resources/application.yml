@@ -10,7 +10,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: 'true'
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: 'true'
   application:
     name: springPlus
@@ -20,6 +20,9 @@ spring:
         bucket: springplus-profile-image-bucket
       region:
         static: ap-southeast-2
+  cache:
+    caffeine:
+      spec: maximumSize=100 #,expireAfterWrite=10s
 jwt:
   secret:
     key: ${JWT_SECRET_KEY}
