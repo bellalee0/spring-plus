@@ -12,10 +12,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import org.example.expert.domain.common.dto.AuthUser;
+import org.example.expert.domain.user.enums.UserRole;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -55,15 +56,16 @@ public class JwtFilter implements Filter {
                 return;
             }
 
-            httpRequest.setAttribute("userId", Long.parseLong(claims.getSubject()));
-            httpRequest.setAttribute("email", claims.get("email"));
-            httpRequest.setAttribute("userRole", claims.get("userRole"));
+            Long userId = Long.parseLong(claims.getSubject());
+            String email = claims.get("email").toString();
+            String userRole = claims.get("userRole").toString();
 
-            String nickname = (String) claims.get("nickname");
-            String userRole = (String) claims.get("userRole");
+            httpRequest.setAttribute("userId", userId);
+            httpRequest.setAttribute("email", email);
+            httpRequest.setAttribute("userRole", userRole);
 
-            User user = new User(nickname, "", List.of(new SimpleGrantedAuthority("ROLE_" + userRole)));
-            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities()));
+            AuthUser authUser = new AuthUser(userId, email, UserRole.of(userRole));
+            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(authUser, null, List.of(new SimpleGrantedAuthority("ROLE_" + authUser.getUserRole()))));
 
             chain.doFilter(request, response);
         } catch (SecurityException | MalformedJwtException e) {
