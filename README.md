@@ -39,7 +39,7 @@
 <details>
 <summary>AWS 서비스 설정</summary>
 <h3>1. RDS</h3>
-<img width=70% alt="image" src="https://github.com/user-attachments/assets/0eb9cfba-692c-4b2a-b24f-ec19b0a1c534" />
+  <img width=70% alt="image" src="https://github.com/user-attachments/assets/0eb9cfba-692c-4b2a-b24f-ec19b0a1c534" />
   
 <h3>2. EC2</h3>
 
@@ -63,17 +63,17 @@
 
 - S3 버킷 조회 권한 설정
 
-<img width=70% alt="스크린샷 2025-12-26 오후 1 58 52" src="https://github.com/user-attachments/assets/0d77d1c0-9717-4bcf-87eb-a2e2f7c52545" />
+  <img width=70% alt="스크린샷 2025-12-26 오후 1 58 52" src="https://github.com/user-attachments/assets/0d77d1c0-9717-4bcf-87eb-a2e2f7c52545" />
 
 - IAM 유저 생성 : S3 버킷 업로드 권한 부여
 
-<img width=70% alt="스크린샷 2025-12-26 오후 2 00 22" src="https://github.com/user-attachments/assets/db035486-6b62-421c-90ad-16a71727b516" />
+  <img width=70% alt="스크린샷 2025-12-26 오후 2 00 22" src="https://github.com/user-attachments/assets/db035486-6b62-421c-90ad-16a71727b516" />
 
 - S3 이미지 업로드 테스트
 
-<img width=70% alt="스크린샷 2025-12-26 오후 2 01 54" src="https://github.com/user-attachments/assets/7b348f2c-f640-4bd4-960a-3367924268a0" />
+  <img width=70% alt="스크린샷 2025-12-26 오후 2 01 54" src="https://github.com/user-attachments/assets/7b348f2c-f640-4bd4-960a-3367924268a0" />
 
-<img width=70% alt="스크린샷 2025-12-26 오후 2 02 44" src="https://github.com/user-attachments/assets/ee1ffd55-210a-4a98-8b8c-d64f7ba5b774" />
+  <img width=70% alt="스크린샷 2025-12-26 오후 2 02 44" src="https://github.com/user-attachments/assets/ee1ffd55-210a-4a98-8b8c-d64f7ba5b774" />
 
 </details>
 
